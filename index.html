@@ -285,8 +285,19 @@
             </div>
 
             <!-- Hero Image -->
-            <div class="w-full h-[250px] sm:h-[350px] md:h-[600px] mt-8 md:mt-12 image-contain-wrapper">
-                <img src="https://i.ibb.co/6R3fKzVG/HERO-OF-JETAYU.png" alt="Jetayu Primary Render">
+            <div class="w-full h-[250px] sm:h-[350px] md:h-[600px] mt-8 md:mt-12 image-contain-wrapper overflow-hidden relative group">
+                <!-- Navigation Arrows -->
+                <button id="prev-media" class="absolute left-4 z-20 p-2 bg-black/50 border border-cyan-400/30 text-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-cyan-400 hover:text-black">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button id="next-media" class="absolute right-4 z-20 p-2 bg-black/50 border border-cyan-400/30 text-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-cyan-400 hover:text-black">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
+                <img id="hero-image" src="https://i.ibb.co/6R3fKzVG/HERO-OF-JETAYU.png" alt="Jetayu Primary Render" class="w-full h-full object-contain transition-opacity duration-500">
+                <div id="hero-video-container" class="hidden w-full h-full">
+                    <div id="player" class="w-full h-full"></div>
+                </div>
             </div>
             <div class="w-full flex justify-between font-mono-tech text-[9px] sm:text-[10px] md:text-xs text-gray-500 mt-2 uppercase">
                 <span>FIG 1.0 - Primary Render</span>
@@ -488,6 +499,7 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 50, easing: 'ease-out-cubic' });
         
@@ -506,6 +518,61 @@
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         };
+
+        // YouTube Player Integration
+        let player;
+        let isVideoShowing = false;
+        const heroImage = document.getElementById('hero-image');
+        const heroVideoContainer = document.getElementById('hero-video-container');
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: '7GivQR6zk2I',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'loop': 1,
+                    'playlist': '7GivQR6zk2I',
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.setVolume(30);
+            
+            // Auto-switch after 10 seconds if user hasn't toggled
+            setTimeout(() => {
+                if (!isVideoShowing) {
+                    toggleMedia();
+                }
+            }, 10000);
+        }
+
+        function toggleMedia() {
+            if (isVideoShowing) {
+                heroImage.classList.remove('hidden');
+                heroVideoContainer.classList.add('hidden');
+                player.pauseVideo();
+            } else {
+                heroImage.classList.add('hidden');
+                heroVideoContainer.classList.remove('hidden');
+                player.playVideo();
+                // Most browsers block unmuted autoplay unless user interacts. 
+                // Since this is a manual toggle or a 10s wait, it might work if the user has clicked elsewhere.
+            }
+            isVideoShowing = !isVideoShowing;
+        }
+
+        document.getElementById('prev-media').addEventListener('click', toggleMedia);
+        document.getElementById('next-media').addEventListener('click', toggleMedia);
     </script>
 </body>
 </html>
