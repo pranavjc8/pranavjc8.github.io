@@ -54,7 +54,6 @@
             position: relative;
         }
         
-        /* HUD Corner Crosshairs */
         .aero-panel::before, .aero-panel::after {
             content: '';
             position: absolute;
@@ -76,7 +75,7 @@
             border-bottom: 1px solid var(--border-tech);
         }
 
-        /* Image Containers - Unzoomed */
+        /* Image Containers */
         .image-contain-wrapper {
             width: 100%;
             height: 100%;
@@ -223,6 +222,16 @@
             z-index: -1;
         }
 
+        /* Lock Screen Styling */
+        #lock-screen {
+            backdrop-filter: blur(10px);
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+        .unlocked #lock-screen {
+            opacity: 0;
+            visibility: hidden;
+        }
+
     </style>
 </head>
 <body>
@@ -241,12 +250,11 @@
             
             <!-- Desktop Nav Items -->
             <div class="hidden md:flex space-x-8 font-mono-tech text-xs tracking-widest uppercase items-center ml-auto px-8">
-                <a href="#overview" class="text-gray-400 hover:text-cyan-400 transition">Overview</a>
-                <a href="#cross-section" class="text-gray-400 hover:text-cyan-400 transition">Architecture</a>
-                <a href="#subsystems" class="text-gray-400 hover:text-cyan-400 transition">Subsystems</a>
-                <a href="#capabilities" class="text-gray-400 hover:text-cyan-400 transition">Capabilities</a>
+                <a href="#gap" class="text-gray-400 hover:text-cyan-400 transition">The Gap</a>
+                <a href="#solution" class="text-gray-400 hover:text-cyan-400 transition">Solution</a>
+                <a href="#subsystems" class="text-gray-400 hover:text-cyan-400 transition">Telemetry</a>
+                <!-- Roadmap link removed -->
                 <a href="#arena" class="text-gray-400 hover:text-cyan-400 transition">JC ARENA</a>
-                <a href="#contact" class="text-gray-400 hover:text-cyan-400 transition">Contact</a>
             </div>
 
             <!-- Mobile Hamburger -->
@@ -258,12 +266,11 @@
         <!-- Mobile Drawer -->
         <div id="mobile-menu" class="md:hidden">
             <div class="px-4 pt-2 pb-6 space-y-1 font-mono-tech text-xs tracking-widest uppercase">
-                <a href="#overview" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Overview</a>
-                <a href="#cross-section" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Architecture</a>
-                <a href="#subsystems" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Subsystems</a>
-                <a href="#capabilities" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Capabilities</a>
-                <a href="#arena" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">JC ARENA</a>
-                <a href="#contact" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Contact</a>
+                <a href="#gap" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">The Gap</a>
+                <a href="#solution" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Solution</a>
+                <a href="#subsystems" class="block px-3 py-4 text-gray-300 hover:text-cyan-400 border-b border-gray-800">Telemetry</a>
+                <!-- Roadmap link removed -->
+                <a href="#arena" class="block px-3 py-4 text-gray-300 hover:text-cyan-400">JC ARENA</a>
             </div>
         </div>
     </header>
@@ -274,56 +281,94 @@
         <section class="min-h-[60vh] flex flex-col justify-center items-start border-l border-gray-800 pl-4 md:pl-8 relative mt-8 md:mt-0" data-aos="fade-in">
             <div class="absolute top-0 left-[-4px] w-2 h-8 bg-cyan-400"></div>
             
-            <p class="font-mono-tech text-cyan-400 text-[10px] sm:text-xs md:text-sm tracking-widest mb-4 md:mb-6">PROJECT // JETAYU Mk-1</p>
+            <p class="font-mono-tech text-cyan-400 text-[10px] sm:text-xs md:text-sm tracking-widest mb-4 md:mb-6">PROJECT // JETAYU</p>
             <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight mb-4 md:mb-8">
                 THE JETAYU <br>
-                <span class="font-semibold text-cyan-400 text-xl sm:text-3xl md:text-5xl uppercase tracking-widest block mt-2">Hybrid VTOL Drone</span>
+                <span class="font-semibold text-cyan-400 text-xl sm:text-3xl md:text-5xl uppercase tracking-widest block mt-2">Hybrid-eVTOL Drone</span>
             </h1>
             
             <div class="max-w-3xl space-y-4 md:space-y-6 text-gray-400 text-sm sm:text-base md:text-lg font-light leading-relaxed">
                 <p>
-                    Jetayu represents the first successful evolution in autonomous heavy-lift aviation. By replacing exposed rotor systems with internal fluidic multiplication, we have established the foundational platform for the next century of scalable, silent logistics.
+                    Redefined by Electric and Fluidic Propulsion Systems. Jetayu represents the first successful evolution in autonomous heavy-lift aviation, engineered to conquer the limitations of conventional logistics.
                 </p>
             </div>
 
-            <!-- Hero Image -->
-            <div class="w-full h-[250px] sm:h-[350px] md:h-[600px] mt-8 md:mt-12 image-contain-wrapper overflow-hidden relative group">
-                <!-- Navigation Arrows -->
-                <button id="prev-media" class="absolute left-4 z-20 p-2 bg-black/50 border border-cyan-400/30 text-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-cyan-400 hover:text-black">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                <button id="next-media" class="absolute right-4 z-20 p-2 bg-black/50 border border-cyan-400/30 text-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-cyan-400 hover:text-black">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
-
-                <img id="hero-image" src="https://i.ibb.co/6R3fKzVG/HERO-OF-JETAYU.png" alt="Jetayu Primary Render" class="w-full h-full object-contain transition-opacity duration-500">
-                <div id="hero-video-container" class="hidden w-full h-full">
-                    <div id="player" class="w-full h-full"></div>
+            <!-- Hero Image / Auto Switch to Video -->
+            <div class="w-full h-[250px] sm:h-[350px] md:h-[600px] mt-8 md:mt-12 image-contain-wrapper relative overflow-hidden flex items-center justify-center">
+                
+                <!-- VIDEO CONTAINER (Starts Visible) -->
+                <div id="video-wrapper" class="absolute inset-0 w-full h-full z-20 transition-opacity duration-1000 opacity-100 overflow-hidden bg-black flex items-center justify-center pointer-events-none">
+                    <!-- Scaled up to hide YouTube UI completely -->
+                    <div class="w-full h-full transform scale-[1.35] sm:scale-125 md:scale-110 pointer-events-none">
+                        <div id="yt-player" class="w-full h-full"></div>
+                    </div>
                 </div>
+
+                <!-- IMAGE CONTAINER (Starts Hidden) -->
+                <img id="hero-img" src="https://i.ibb.co/6R3fKzVG/HERO-OF-JETAYU.png" alt="Jetayu Primary Render" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0 z-10 pointer-events-none">
+                
             </div>
             <div class="w-full flex justify-between font-mono-tech text-[9px] sm:text-[10px] md:text-xs text-gray-500 mt-2 uppercase">
-                <span>FIG 1.0 - Primary Render</span>
+                <span id="hero-caption">FIG 1.0 - FLIGHT SIMULATION VIDEO</span>
                 <span>STATUS: OPERATIONAL</span>
             </div>
         </section>
 
-        <!-- 01. NECESSITY -->
-        <section id="overview" data-aos="fade-up" class="w-full">
-        <!-- 01. FLIGHT DYNAMICS -->
-        <section id="overview" data-aos="fade-up" class="w-full">
+        <!-- 01. THE AEROSPACE GAP -->
+        <section id="gap" data-aos="fade-up" class="w-full">
             <div class="section-header">
                 <span class="section-number">01</span>
-                <h2 class="section-title">Flight Dynamics</h2>
+                <h2 class="section-title">The Aerospace Gap</h2>
             </div>
+            <p class="text-gray-400 font-mono-tech text-xs md:text-sm uppercase tracking-widest mb-8 border-l-2 border-cyan-400 pl-4">The Major Challenges with Conventional Logistic Drones</p>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full">
+                <div class="aero-panel p-6 flex flex-col justify-start">
+                    <div class="w-10 h-10 rounded-full bg-cyan-900/30 flex items-center justify-center border border-cyan-400/50 mb-4 text-cyan-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="font-mono-tech text-white text-sm md:text-base mb-2">Energy & Endurance</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light leading-relaxed">Limited range, heavy battery weight constraints, and inefficient fuel consumption limit operational viability.</p>
+                </div>
+                <div class="aero-panel p-6 flex flex-col justify-start">
+                    <div class="w-10 h-10 rounded-full bg-cyan-900/30 flex items-center justify-center border border-cyan-400/50 mb-4 text-cyan-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h3 class="font-mono-tech text-white text-sm md:text-base mb-2">Operational Safety</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light leading-relaxed">Severe safety risks and structural vulnerabilities resulting from exposed rotor blades and Foreign Object Debris (FOD) hazards.</p>
+                </div>
+                <div class="aero-panel p-6 flex flex-col justify-start">
+                    <div class="w-10 h-10 rounded-full bg-cyan-900/30 flex items-center justify-center border border-cyan-400/50 mb-4 text-cyan-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                    </div>
+                    <h3 class="font-mono-tech text-white text-sm md:text-base mb-2">Acoustic Signature</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light leading-relaxed">Significant high-frequency acoustic noise signatures strictly impacting stealth operations and residential urban use.</p>
+                </div>
+                <div class="aero-panel p-6 flex flex-col justify-start">
+                    <div class="w-10 h-10 rounded-full bg-cyan-900/30 flex items-center justify-center border border-cyan-400/50 mb-4 text-cyan-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                    </div>
+                    <h3 class="font-mono-tech text-white text-sm md:text-base mb-2">Systemic Inefficiency</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light leading-relaxed">Overall inefficiency in thrust generation due to massive aerodynamic losses in traditional quadcopter airframes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. FLIGHT DYNAMICS / SOLUTION -->
+        <section id="solution" data-aos="fade-up" class="w-full">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Flight Dynamics & Solution</h2>
+            </div>
+            
             <div class="grid lg:grid-cols-12 gap-8 md:gap-12 items-center w-full">
                 <!-- Flight Profile Image -->
-                <div class="lg:col-span-7 image-contain-wrapper h-auto w-full p-2 md:p-4">
+                <div class="lg:col-span-7 image-contain-wrapper h-auto w-full p-2 md:p-4 border-cyan-900/50">
                     <img src="https://i.ibb.co/TqWNdjKx/JETAYU-FLIGHT-PROFLIE.jpg" alt="Jetayu Flight Profile" class="w-full h-auto">
                 </div>
                 
-                <!-- High-Speed Cruise Configuration Details -->
-                <div class="lg:col-span-5 w-full">
-                    <div class="aero-panel p-6 md:p-8 border-l-2 border-l-cyan-400 bg-black/40">
+                <div class="lg:col-span-5 w-full space-y-4">
+                    <div class="aero-panel p-6 border-l-2 border-l-cyan-400 bg-black/40 mb-6">
                         <h3 class="font-mono-tech text-cyan-400 text-sm md:text-base uppercase mb-4 tracking-widest">High-Speed Cruise Configuration</h3>
                         <ul class="text-gray-300 font-light text-sm md:text-base space-y-4 list-disc pl-5">
                             <li><strong class="text-white font-medium">Wing-Borne Flight:</strong> Seamless transition to horizontal lift capabilities.</li>
@@ -331,119 +376,153 @@
                             <li><strong class="text-white font-medium">Kinetic Scavenging:</strong> APU propeller unit actively regenerates power mid-flight.</li>
                         </ul>
                     </div>
+                    
+                    <div class="aero-panel p-5 border-l-2 border-l-cyan-400">
+                        <h3 class="font-mono-tech text-cyan-400 text-xs md:text-sm uppercase mb-1 tracking-widest">Aero-Acoustics</h3>
+                        <p class="text-gray-300 font-light text-xs sm:text-sm">Integrated acoustic liners and internal ducted architecture significantly reduce disc loading and tonal noise.</p>
+                    </div>
+                    <div class="aero-panel p-5 border-l-2 border-l-cyan-400">
+                        <h3 class="font-mono-tech text-cyan-400 text-xs md:text-sm uppercase mb-1 tracking-widest">Adaptive Morphing</h3>
+                        <p class="text-gray-300 font-light text-xs sm:text-sm">Morphing wings actively adjust and stow to eliminate vertical drag during VTOL flight phases.</p>
+                    </div>
+                    <div class="aero-panel p-5 border-l-2 border-l-cyan-400">
+                        <h3 class="font-mono-tech text-cyan-400 text-xs md:text-sm uppercase mb-1 tracking-widest">Propulsion Redundancy</h3>
+                        <p class="text-gray-300 font-light text-xs sm:text-sm">Combined electric and fluidic propulsion systems ensure mission-critical redundancy in contested airspace.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 02. CROSS SECTION -->
+        <!-- 03. CROSS SECTION -->
         <section id="cross-section" data-aos="fade-up" class="w-full">
             <div class="section-header">
-                <span class="section-number">02</span>
+                <span class="section-number">03</span>
                 <h2 class="section-title">Internal Architecture</h2>
             </div>
-            <!-- Removed fixed heights, added h-auto to perfectly fit the image -->
             <div class="image-contain-wrapper h-auto w-full p-2 md:p-4">
                 <img src="https://i.ibb.co/2Yc6TdXj/cs-of-jetayu-1.png" alt="Jetayu Internal Architecture Cross-Section" class="w-full h-auto">
             </div>
-            <div class="w-full flex justify-between font-mono-tech text-[9px] sm:text-[10px] md:text-xs text-cyan-400 mt-2 uppercase drop-shadow">
-                <span>FIG 2.0 - Technical Schematic</span>
-                <span>DATA STATUS: ACTIVE</span>
+            <div class="w-full flex justify-between font-mono-tech text-[9px] sm:text-[10px] md:text-xs text-gray-500 mt-2 uppercase">
+                <span>FIG 3.0 - Technical Schematic</span>
+                <span>CLASS: UAV / eVTOL</span>
             </div>
         </section>
 
-        <!-- 03. SUBSYSTEMS -->
+        <!-- 04. RESTRICTED SUBSYSTEMS -->
         <section id="subsystems" data-aos="fade-up" class="w-full">
             <div class="section-header">
-                <span class="section-number">03</span>
+                <span class="section-number">04</span>
                 <h2 class="section-title">Subsystem Telemetry</h2>
             </div>
-            <div class="flex flex-wrap gap-2 mb-4 md:mb-6 justify-center md:justify-start w-full">
-                <button class="tab-btn active" onclick="openTab(event, 'tab-compressor')">Compressor</button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-pa1')">PA1 DCFPS</button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-propeller')">Propeller</button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-wings')">Morphing Wings</button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-energy')">Energy</button>
-            </div>
+            
+            <!-- SECURE CONTAINER -->
+            <div id="secure-container" class="relative w-full border border-gray-800 rounded bg-[#0A0D14] overflow-hidden min-h-[500px]">
+                
+                <!-- LOCK SCREEN OVERLAY -->
+                <div id="lock-screen" class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/95 backdrop-blur-md p-6 text-center transition-all duration-500">
+                    <svg class="w-16 h-16 text-cyan-500 mb-6 drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <h3 class="font-mono-tech text-white text-xl md:text-2xl tracking-[0.2em] mb-2 uppercase">Restricted Access</h3>
+                    <p class="text-gray-400 text-xs md:text-sm mb-8 max-w-md">Engineering telemetry, schematics, and subsystem specifics are classified. Please enter authorization clearance code.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
+                        <input type="password" id="clearance-code" class="w-full bg-black border border-gray-700 text-cyan-400 px-4 py-3 font-mono-tech text-center outline-none focus:border-cyan-400 transition" placeholder="ENTER CODE">
+                        <button onclick="checkClearance()" class="w-full sm:w-auto bg-cyan-900/40 border border-cyan-400 text-cyan-400 px-6 py-3 font-mono-tech hover:bg-cyan-400 hover:text-black transition tracking-widest uppercase">Decrypt</button>
+                    </div>
+                    <p id="lock-error" class="text-red-500 font-mono-tech text-[10px] md:text-xs mt-4 opacity-0 transition-opacity">ACCESS DENIED. INVALID IDENTIFIER.</p>
+                    <p class="text-gray-600 font-mono-tech text-[9px] mt-8">HINT: JC2026</p>
+                </div>
 
-            <div class="aero-panel p-4 sm:p-6 md:p-10 w-full overflow-hidden border-x-0 sm:border-x">
-                <!-- COMPRESSOR -->
-                <div id="tab-compressor" class="tab-content active w-full">
-                    <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
-                        <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[500px] w-full p-2 md:p-4">
-                            <img src="https://i.ibb.co/ccVpfMy1/Screenshot-10.png" alt="Mixed-Flow Compressor">
-                        </div>
-                        <div class="space-y-4 md:space-y-6 w-full">
-                            <h3 class="text-lg sm:text-xl md:text-2xl font-light text-white uppercase tracking-widest break-words">Mixed-Flow Compressor</h3>
-                            <p class="text-gray-400 leading-relaxed font-light text-xs sm:text-sm md:text-base">Operating at 66,000 RPM, the titanium core serves as the primary driver for fluidic injection.</p>
-                            <div class="telemetry-grid w-full">
-                                <div class="telemetry-node"><span class="telemetry-label">Impeller Dia.</span><span class="telemetry-value">177mm</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Material</span><span class="telemetry-value text-sm md:text-lg">Titanium</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Max Velocity</span><span class="telemetry-value">66,000 RPM</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Pressure Ratio</span><span class="telemetry-value">5.2:1</span></div>
+                <!-- HIDDEN CONTENT (Revealed via JS) -->
+                <div class="p-4 sm:p-6 md:p-8">
+                    <div class="flex flex-wrap gap-2 mb-4 md:mb-6 justify-center md:justify-start w-full">
+                        <button class="tab-btn active" onclick="openTab(event, 'tab-compressor')">Compressor</button>
+                        <button class="tab-btn" onclick="openTab(event, 'tab-pa1')">PA1 DCFPS</button>
+                        <button class="tab-btn" onclick="openTab(event, 'tab-propeller')">Propeller</button>
+                        <button class="tab-btn" onclick="openTab(event, 'tab-wings')">Morphing Wings</button>
+                        <button class="tab-btn" onclick="openTab(event, 'tab-energy')">Energy Core</button>
+                    </div>
+
+                    <div class="w-full border-t border-gray-800 pt-6">
+                        <!-- COMPRESSOR -->
+                        <div id="tab-compressor" class="tab-content active w-full">
+                            <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
+                                <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[400px] w-full p-2 md:p-4">
+                                    <img src="https://i.ibb.co/ccVpfMy1/Screenshot-10.png" alt="Mixed-Flow Compressor Schematic">
+                                </div>
+                                <div class="space-y-4 md:space-y-6 w-full">
+                                    <h3 class="text-lg sm:text-xl font-light text-white uppercase tracking-widest break-words">Mixed-Flow Compressor</h3>
+                                    <p class="text-gray-400 leading-relaxed font-light text-xs sm:text-sm">Operating at 66,000 RPM, the titanium core serves as the primary driver for fluidic injection.</p>
+                                    <div class="telemetry-grid w-full">
+                                        <div class="telemetry-node"><span class="telemetry-label">Impeller Dia.</span><span class="telemetry-value">177mm</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Material</span><span class="telemetry-value text-sm md:text-base">Titanium</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Max Velocity</span><span class="telemetry-value">66,000 RPM</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Pressure Ratio</span><span class="telemetry-value">5.2:1</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- PA1 -->
-                <div id="tab-pa1" class="tab-content w-full">
-                    <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
-                        <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[500px] w-full p-2 md:p-4">
-                            <img src="https://i.ibb.co/ycDSSCPN/Gemini-Generated-Image-n26shpn26shpn26s.png" alt="PA1 Pods">
-                        </div>
-                        <div class="space-y-4 md:space-y-6 w-full">
-                            <h3 class="text-lg sm:text-xl md:text-2xl font-light text-white uppercase tracking-widest break-words">PA1 Propulsion Pods</h3>
-                            <p class="text-gray-400 font-light text-xs sm:text-sm md:text-base">Localized fluidic multipliers utilizing the Coanda effect to entrain ambient air volumes.</p>
-                            <div class="telemetry-grid w-full">
-                                <div class="telemetry-node"><span class="telemetry-label">Outer Cowl</span><span class="telemetry-value">400x220mm</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Inner Cowl</span><span class="telemetry-value">320x200mm</span></div>
+                        <!-- PA1 -->
+                        <div id="tab-pa1" class="tab-content w-full">
+                            <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
+                                <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[400px] w-full p-2 md:p-4">
+                                    <img src="https://i.ibb.co/ycDSSCPN/Gemini-Generated-Image-n26shpn26shpn26s.png" alt="PA1 Pods">
+                                </div>
+                                <div class="space-y-4 md:space-y-6 w-full">
+                                    <h3 class="text-lg sm:text-xl font-light text-white uppercase tracking-widest break-words">PA1 Propulsion Pods</h3>
+                                    <p class="text-gray-400 font-light text-xs sm:text-sm">Localized fluidic multipliers utilizing the Coanda effect to entrain ambient air volumes.</p>
+                                    <div class="telemetry-grid w-full">
+                                        <div class="telemetry-node"><span class="telemetry-label">Outer Cowl</span><span class="telemetry-value">400x220mm</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Inner Cowl</span><span class="telemetry-value">320x200mm</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- PROPELLER -->
-                <div id="tab-propeller" class="tab-content w-full">
-                    <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
-                        <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[500px] w-full p-2 md:p-4">
-                            <img src="https://i.ibb.co/qMVdMq4Q/PROPELLER-PROFILE.png" alt="Prop Design">
-                        </div>
-                        <div class="space-y-4 md:space-y-6 w-full">
-                            <h3 class="text-lg sm:text-xl md:text-2xl font-light text-white uppercase tracking-widest break-words">Propeller Blade Design</h3>
-                            <p class="text-gray-400 font-light text-xs sm:text-sm md:text-base">Precision carbon fiber blades optimized for high-efficiency thrust and kinetic recovery.</p>
-                            <div class="telemetry-grid w-full">
-                                <div class="telemetry-node"><span class="telemetry-label">Diameter</span><span class="telemetry-value">12 in</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Material</span><span class="telemetry-value">Carbon Fiber</span></div>
+                        <!-- PROPELLER -->
+                        <div id="tab-propeller" class="tab-content w-full">
+                            <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
+                                <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[400px] w-full p-2 md:p-4">
+                                    <img src="https://i.ibb.co/qMVdMq4Q/PROPELLER-PROFILE.png" alt="Prop Design">
+                                </div>
+                                <div class="space-y-4 md:space-y-6 w-full">
+                                    <h3 class="text-lg sm:text-xl font-light text-white uppercase tracking-widest break-words">Propeller Blade Design</h3>
+                                    <p class="text-gray-400 font-light text-xs sm:text-sm">Precision carbon fiber blades optimized for high-efficiency thrust and kinetic recovery.</p>
+                                    <div class="telemetry-grid w-full">
+                                        <div class="telemetry-node"><span class="telemetry-label">Diameter</span><span class="telemetry-value">12 in</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Material</span><span class="telemetry-value">Carbon Fiber</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- WINGS -->
-                <div id="tab-wings" class="tab-content w-full">
-                    <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
-                        <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[500px] w-full p-2 md:p-4">
-                            <img src="https://i.ibb.co/PsRD32bt/Gemini-Generated-Image-rzcyo0rzcyo0rzcy.png" alt="Morphing Wings">
-                        </div>
-                        <div class="space-y-4 md:space-y-6 w-full">
-                            <h3 class="text-lg sm:text-xl md:text-2xl font-light text-white uppercase tracking-widest break-words">Morphing Wings</h3>
-                            <p class="text-gray-400 font-light text-xs sm:text-sm md:text-base">Translating-pivot sequence transforming the pod from VTOL to a high-lift glider configuration.</p>
-                            <div class="telemetry-grid w-full">
-                                <div class="telemetry-node"><span class="telemetry-label">Wingspan</span><span class="telemetry-value">2,600mm</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Profile</span><span class="telemetry-value">NACA 4412</span></div>
+                        <!-- WINGS -->
+                        <div id="tab-wings" class="tab-content w-full">
+                            <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
+                                <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[400px] w-full p-2 md:p-4">
+                                    <img src="https://i.ibb.co/PsRD32bt/Gemini-Generated-Image-rzcyo0rzcyo0rzcy.png" alt="Wing Mech">
+                                </div>
+                                <div class="space-y-4 md:space-y-6 w-full">
+                                    <h3 class="text-lg sm:text-xl font-light text-white uppercase tracking-widest break-words">Morphing Wings</h3>
+                                    <p class="text-gray-400 font-light text-xs sm:text-sm">Translating-pivot sequence transforming the pod from VTOL to a high-lift glider configuration.</p>
+                                    <div class="telemetry-grid w-full">
+                                        <div class="telemetry-node"><span class="telemetry-label">Wingspan</span><span class="telemetry-value">2,600mm</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Profile</span><span class="telemetry-value">NACA 4412</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- ENERGY -->
-                <div id="tab-energy" class="tab-content w-full">
-                    <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
-                        <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[500px] w-full p-2 md:p-4">
-                            <img src="https://i.ibb.co/mFS9ZFWD/Gemini-Generated-Image-o94mnao94mnao94m.png" alt="Energy Core">
-                        </div>
-                        <div class="space-y-4 md:space-y-6 w-full">
-                            <h3 class="text-lg sm:text-xl md:text-2xl font-light text-white uppercase tracking-widest break-words">Energy Core</h3>
-                            <p class="text-gray-400 font-light text-xs sm:text-sm md:text-base">16S Silicon-Anode pack with mid-flight kinetic regeneration via windmilling propellers.</p>
-                            <div class="telemetry-grid w-full">
-                                <div class="telemetry-node"><span class="telemetry-label">Voltage</span><span class="telemetry-value">59.2V Nominal</span></div>
-                                <div class="telemetry-node"><span class="telemetry-label">Controller</span><span class="telemetry-value">Pixhawk Cube Orange+</span></div>
+                        <!-- ENERGY -->
+                        <div id="tab-energy" class="tab-content w-full">
+                            <div class="grid lg:grid-cols-2 gap-6 md:gap-10 items-start w-full">
+                                <div class="image-contain-wrapper h-[250px] sm:h-[350px] md:h-[400px] w-full p-2 md:p-4">
+                                    <img src="https://i.ibb.co/mFS9ZFWD/Gemini-Generated-Image-o94mnao94mnao94m.png" alt="Energy Core">
+                                </div>
+                                <div class="space-y-4 md:space-y-6 w-full">
+                                    <h3 class="text-lg sm:text-xl font-light text-white uppercase tracking-widest break-words">Energy Core</h3>
+                                    <p class="text-gray-400 font-light text-xs sm:text-sm">16S Silicon-Anode pack with mid-flight kinetic regeneration via windmilling propellers.</p>
+                                    <div class="telemetry-grid w-full">
+                                        <div class="telemetry-node"><span class="telemetry-label">Voltage</span><span class="telemetry-value">59.2V</span></div>
+                                        <div class="telemetry-node"><span class="telemetry-label">Controller</span><span class="telemetry-value">Pixhawk Cube</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -451,41 +530,32 @@
             </div>
         </section>
 
-        <!-- 04. CAPABILITIES -->
-        <section id="capabilities" data-aos="fade-up" class="w-full">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <h2 class="section-title">Operational Capabilities</h2>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-4 md:gap-6 w-full">
-                <div class="aero-panel p-4 md:p-8 w-full bg-black/40"><h3 class="font-mono-tech text-cyan-400 mb-2">Unprecedented Range</h3><p class="text-gray-400 text-xs sm:text-base">Actively recharges the battery mid-flight via kinetic scavenging.</p></div>
-                <div class="aero-panel p-4 md:p-8 w-full bg-black/40"><h3 class="font-mono-tech text-cyan-400 mb-2">Level 3 Redundancy</h3><p class="text-gray-400 text-xs sm:text-base">Maintains vertical flight through fluidic multiplication if blades are damaged.</p></div>
-            </div>
-        </section>
+        <!-- Note: Section 05 (Roadmap) removed. Numbering adjusted. -->
 
-        <!-- 05. ARCHITECTURE IMAGE -->
+        <!-- 05. FULL ARCHITECTURE IMAGE -->
         <section id="system-overview" data-aos="fade-up" class="py-6 md:py-12 w-full overflow-hidden">
             <div class="section-header"><span class="section-number">05</span><h2 class="section-title">Full Architecture</h2></div>
             <div class="w-full image-contain-wrapper p-1 md:p-2 border-none h-auto bg-transparent">
                 <img src="https://i.ibb.co/s92XdGj5/all-in-1.png" alt="Jetayu Architecture" class="w-full h-auto max-h-[800px] object-contain border border-gray-800 rounded">
             </div>
+            <div class="w-full flex justify-between font-mono-tech text-[9px] sm:text-[10px] md:text-xs text-gray-500 mt-2 md:mt-4 uppercase drop-shadow">
+                <span>FIG 5.0 - Integrated Overview</span>
+                <span class="text-cyan-400">STATUS: CLASSIFIED</span>
+            </div>
         </section>
 
         <!-- 06. ARENA -->
         <section id="arena" class="pt-8 sm:pt-12 md:pt-24 pb-8 md:pb-12 w-full" data-aos="fade-up">
-            <!-- Background Image Integration -->
             <div class="aero-panel border-purple-900/50 p-6 sm:p-12 md:p-20 text-center relative overflow-hidden w-full backdrop-blur-md"
                  style="background-image: url('https://i.ibb.co/b8xb90C/Gemini-Generated-Image-phfrurphfrurphfr.png'); background-size: cover; background-position: center;">
                 
-                <!-- Dark overlay to ensure text is readable -->
                 <div class="absolute inset-0 bg-black/75"></div>
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(139,92,246,0.25),transparent_60%)]"></div>
                 
                 <div class="relative z-10">
                     <p class="font-mono-tech text-[#d884ff] text-[9px] sm:text-xs mb-4 uppercase tracking-[0.3em] drop-shadow-md">Tactical & Entertainment</p>
-                    <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-8 uppercase tracking-tight whitespace-nowrap" style="text-shadow: 0 0 20px rgba(176,38,255,0.6);">JC ARENA</h2>
+                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-8 uppercase tracking-tight whitespace-nowrap" style="text-shadow: 0 0 20px rgba(176,38,255,0.6);">JC ARENA</h2>
                     
-                    <!-- Upgraded Glowing Button -->
                     <a href="https://pranavjc8.github.io/jc-arena/" target="_blank" class="inline-block border border-purple-400 text-white font-mono-tech text-xs md:text-sm tracking-widest uppercase px-8 py-4 hover:bg-purple-600 hover:border-purple-300 transition-all rounded shadow-[0_0_20px_rgba(176,38,255,0.4)] hover:shadow-[0_0_30px_rgba(176,38,255,0.8)] bg-purple-900/30 backdrop-blur-sm">
                         Initialize Arena Link
                     </a>
@@ -493,57 +563,15 @@
             </div>
         </section>
 
-        <!-- 07. CONTACT -->
-        <section id="contact" class="pt-8 sm:pt-12 md:pt-24 pb-8 md:pb-12 w-full" data-aos="fade-up">
-            <div class="section-header">
-                <span class="section-number">07</span>
-                <h2 class="section-title">Communication Hub</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
-                <!-- Location -->
-                <div class="aero-panel p-6 bg-black/40 border-l-2 border-l-cyan-400">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-2 bg-cyan-400/10 rounded">
-                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        </div>
-                        <h3 class="font-mono-tech text-white text-sm uppercase tracking-widest">Base of Operations</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm font-light">Bengaluru, India</p>
-                </div>
-
-                <!-- Email -->
-                <div class="aero-panel p-6 bg-black/40 border-l-2 border-l-cyan-400">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-2 bg-cyan-400/10 rounded">
-                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h3 class="font-mono-tech text-white text-sm uppercase tracking-widest">Digital Uplink</h3>
-                    </div>
-                    <a href="mailto:aerospacejc@gmail.com" class="text-gray-400 text-sm font-light hover:text-cyan-400 transition">aerospacejc@gmail.com</a>
-                </div>
-
-                <!-- Phone -->
-                <div class="aero-panel p-6 bg-black/40 border-l-2 border-l-cyan-400">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-2 bg-cyan-400/10 rounded">
-                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                        </div>
-                        <h3 class="font-mono-tech text-white text-sm uppercase tracking-widest">Voice Comms</h3>
-                    </div>
-                    <a href="tel:+918660734236" class="text-gray-400 text-sm font-light hover:text-cyan-400 transition">+91 8660734236</a>
-                </div>
-            </div>
-        </section>
-
         <footer class="border-t border-gray-800 pt-6 md:pt-8 mt-4 md:mt-12 flex flex-col sm:flex-row justify-between items-center text-[9px] sm:text-xs font-mono-tech text-gray-500 uppercase tracking-widest gap-4 text-center sm:text-left">
-            <div><p>HQ: Bengaluru, India // COMMS: +91 8660734236</p></div>
+            <div><p>HQ: Bengaluru, India // COMMS: pranav@jcaerospace.in</p></div>
             <div class="sm:text-right"><p>&copy; 2026 JC AEROSPACE CORP.</p></div>
         </footer>
     </main>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Load the YouTube Iframe API -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 50, easing: 'ease-out-cubic' });
@@ -564,25 +592,49 @@
             evt.currentTarget.classList.add("active");
         };
 
-        // YouTube Player Integration
-        let player;
-        let isVideoShowing = false;
-        const heroImage = document.getElementById('hero-image');
-        const heroVideoContainer = document.getElementById('hero-video-container');
+        // Privacy Lock Logic
+        function checkClearance() {
+            const codeInput = document.getElementById('clearance-code');
+            const errorText = document.getElementById('lock-error');
+            const secureContainer = document.getElementById('secure-container');
+            
+            if (codeInput.value.trim().toUpperCase() === 'JC2026') {
+                secureContainer.classList.add('unlocked');
+                errorText.classList.remove('opacity-100');
+                errorText.classList.add('opacity-0');
+            } else {
+                errorText.classList.remove('opacity-0');
+                errorText.classList.add('opacity-100');
+                codeInput.value = '';
+                
+                // Shake effect for error
+                codeInput.classList.add('translate-x-2');
+                setTimeout(() => codeInput.classList.remove('translate-x-2'), 100);
+            }
+        }
 
+        document.getElementById('clearance-code').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkClearance();
+        });
+
+        // --- YouTube & Image Looping Logic ---
+        let player;
+        
+        // This function is automatically called by the YT API when it loads
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
+            player = new YT.Player('yt-player', {
                 videoId: 'Q-63fnJRZbM',
                 playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'modestbranding': 1,
-                    'rel': 0,
-                    'loop': 1,
-                    'playlist': 'Q-63fnJRZbM',
-                    'playsinline': 1
+                    'autoplay': 1,
+                    'controls': 0,        // Hide player controls
+                    'disablekb': 1,       // Disable keyboard controls
+                    'loop': 1,            // Loop the video
+                    'modestbranding': 1,  // Hide YouTube logo
+                    'playsinline': 1,     // Play inline on mobile
+                    'rel': 0,             // Don't show related videos
+                    'showinfo': 0,        // Hide video title
+                    'mute': 0,            // Start unmuted 
+                    'playlist': 'Q-63fnJRZbM' // Required to loop a single video
                 },
                 events: {
                     'onReady': onPlayerReady
@@ -591,33 +643,34 @@
         }
 
         function onPlayerReady(event) {
-            event.target.setVolume(30);
+            // Force volume to 100
+            event.target.setVolume(100);
+            event.target.playVideo();
             
-            // Auto-switch after 10 seconds if user hasn't toggled
-            setTimeout(() => {
-                if (!isVideoShowing) {
-                    toggleMedia();
+            // Start the 12-second infinite crossfade loop
+            startCrossfadeLoop();
+        }
+
+        function startCrossfadeLoop() {
+            setInterval(() => {
+                const vidWrap = document.getElementById('video-wrapper');
+                const imgWrap = document.getElementById('hero-img');
+                const caption = document.getElementById('hero-caption');
+                
+                // If video is currently showing, switch to image
+                if (vidWrap.classList.contains('opacity-100')) {
+                    vidWrap.classList.replace('opacity-100', 'opacity-0');
+                    imgWrap.classList.replace('opacity-0', 'opacity-100');
+                    if (caption) caption.textContent = "FIG 1.0 - PRIMARY RENDER";
+                } 
+                // If image is currently showing, switch to video
+                else {
+                    imgWrap.classList.replace('opacity-100', 'opacity-0');
+                    vidWrap.classList.replace('opacity-0', 'opacity-100');
+                    if (caption) caption.textContent = "FIG 1.0 - FLIGHT SIMULATION VIDEO";
                 }
-            }, 10000);
+            }, 12000); // 12000 milliseconds = 12 seconds
         }
-
-        function toggleMedia() {
-            if (isVideoShowing) {
-                heroImage.classList.remove('hidden');
-                heroVideoContainer.classList.add('hidden');
-                player.pauseVideo();
-            } else {
-                heroImage.classList.add('hidden');
-                heroVideoContainer.classList.remove('hidden');
-                player.playVideo();
-                // Most browsers block unmuted autoplay unless user interacts. 
-                // Since this is a manual toggle or a 10s wait, it might work if the user has clicked elsewhere.
-            }
-            isVideoShowing = !isVideoShowing;
-        }
-
-        document.getElementById('prev-media').addEventListener('click', toggleMedia);
-        document.getElementById('next-media').addEventListener('click', toggleMedia);
     </script>
 </body>
 </html>
